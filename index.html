@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>Temur Xoldarov</title>
+
+  <link rel="preload" href="background.jpg" as="image">
+
   <style>
     html {
       overflow: hidden;
@@ -13,13 +16,17 @@
 
     body {
       height: 100%;
-      background-color: black;
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-image: url(background.jpg);
+      background-color: #111118;
       background-repeat: no-repeat;
       background-position: center top;
       background-size: cover;
+      transition: background-image 0.4s ease;
+    }
+
+    body.loaded {
+      background-image: url(background.jpg);
     }
 
     .photograph-credit {
@@ -102,7 +109,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  const img = new Image();
+  img.src = 'background.jpg';
+  img.onload = () => document.body.classList.add('loaded');
+</script>
 </body>
 
 </html>
-
