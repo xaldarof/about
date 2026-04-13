@@ -4,83 +4,73 @@
   #game-wrap {
     font-family: 'Courier New', monospace;
     background: #0f0f0f;
-    min-height: 520px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 24px 16px 16px;
-    color: #ccc;
+    width: 100%; min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 24px 16px; color: #ccc;
   }
-  #top-bar {
-    width: 100%; max-width: 700px;
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 8px;
-  }
-  #name-title { font-size: 18px; font-weight: bold; color: #aaa; letter-spacing: 2px; }
-  #score-box { font-size: 14px; color: #666; letter-spacing: 2px; }
-  #hi-score { font-size: 14px; color: #555; letter-spacing: 2px; }
+  #inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  #top-bar { width: 100%; display: flex; justify-content: space-between; align-items: baseline; }
+  #name-title { font-size: 20px; font-weight: bold; color: #aaa; letter-spacing: 3px; }
+  #score-box { font-size: 15px; color: #666; letter-spacing: 2px; }
+  #hi-score { font-size: 15px; color: #555; letter-spacing: 2px; }
+  #canvas-wrap { position: relative; width: 100%; }
   canvas {
     border-top: 2px solid #333; border-bottom: 2px solid #333;
     display: block; background: #0f0f0f;
-    width: 100%; max-width: 700px; image-rendering: pixelated;
+    width: 100%; image-rendering: pixelated;
   }
-  #bottom-bar {
-    width: 100%; max-width: 700px;
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: 10px;
-  }
-  #links { display: flex; gap: 12px; align-items: center; }
-  #links a {
-    font-size: 12px; color: #555; text-decoration: none;
-    letter-spacing: 1px; transition: color 0.2s, border-color 0.2s;
-    border: 1px solid #2a2a2a; padding: 5px 12px; border-radius: 4px;
-    display: flex; align-items: center; gap: 6px;
-  }
-  #links a:hover { color: #bbb; border-color: #555; }
-  #links a svg { flex-shrink: 0; }
-  #instructions { font-size: 11px; color: #3a3a3a; letter-spacing: 1px; text-align: right; }
-  #canvas-wrap { position: relative; width: 100%; max-width: 700px; }
   #overlay {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
   }
-  .msg { font-size: 15px; color: #888; letter-spacing: 3px; text-transform: uppercase; }
-  .sub-msg { font-size: 11px; color: #555; letter-spacing: 2px; margin-top: 6px; }
+  .msg { font-size: 16px; color: #888; letter-spacing: 3px; text-transform: uppercase; }
+  .sub-msg { font-size: 12px; color: #555; letter-spacing: 2px; margin-top: 6px; }
+  #bottom-bar { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+  #links { display: flex; gap: 12px; align-items: center; }
+  #links a {
+    font-size: 12px; color: #555; text-decoration: none; letter-spacing: 1px;
+    transition: color 0.2s, border-color 0.2s;
+    border: 1px solid #2a2a2a; padding: 5px 12px; border-radius: 4px;
+    display: flex; align-items: center; gap: 6px; background: #0f0f0f;
+  }
+  #links a:hover { color: #bbb; border-color: #555; }
+  #instructions { font-size: 11px; color: #3a3a3a; letter-spacing: 1px; text-align: right; }
 </style>
 
 <div id="game-wrap">
-  <div id="top-bar">
-    <div id="name-title">TEMUR XOLDAROV</div>
-    <div style="display:flex;gap:18px;">
-      <div id="hi-score">HI 00000</div>
-      <div id="score-box">00000</div>
+  <div id="inner">
+    <div id="top-bar">
+      <div id="name-title">TEMUR XOLDAROV</div>
+      <div style="display:flex;gap:18px;">
+        <div id="hi-score">HI 00000</div>
+        <div id="score-box">00000</div>
+      </div>
     </div>
-  </div>
-  <div id="canvas-wrap">
-    <canvas id="gc" height="160"></canvas>
-    <div id="overlay">
-      <div class="msg" id="msg">PRESS SPACE / TAP</div>
-      <div class="sub-msg" id="sub">to start</div>
+    <div id="canvas-wrap">
+      <canvas id="gc"></canvas>
+      <div id="overlay">
+        <div class="msg" id="msg">PRESS SPACE / TAP</div>
+        <div class="sub-msg" id="sub">to start</div>
+      </div>
     </div>
-  </div>
-  <div id="bottom-bar">
-    <div id="links">
-      <a href="https://www.linkedin.com/in/temur-xoldarov-37067b230" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-      <a href="https://t.me/xaldarof" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#2CA5E0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        Telegram
-      </a>
-      <a href="https://github.com/xaldarof" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#ccc"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        GitHub
-      </a>
+    <div id="bottom-bar">
+      <div id="links">
+        <a href="https://uz.linkedin.com/in/temur-xoldarov-37067b230" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://t.me/xaldarof" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#2CA5E0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          Telegram
+        </a>
+        <a href="https://github.com/xaldarof" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#ccc"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div id="instructions">SPACE / ↑ JUMP · ↓ DUCK</div>
     </div>
-    <div id="instructions">SPACE / ↑ JUMP · ↓ DUCK</div>
   </div>
 </div>
 
@@ -93,117 +83,97 @@ const subEl = document.getElementById('sub');
 const scoreEl = document.getElementById('score-box');
 const hiEl = document.getElementById('hi-score');
 
-const W = 700, H = 160;
+const W = 900, H = 260;
 canvas.width = W; canvas.height = H;
 
-const GND = 130;
-const GRAVITY = 0.6;
-const JUMP_V = -13;
-let speed = 5, score = 0, hiScore = 0, frame = 0;
-let state = 'idle';
+const GND = 210, GRAVITY = 0.6, JUMP_V = -15;
+let speed = 5, score = 0, hiScore = 0, frame = 0, state = 'idle';
 
-const dino = { x: 70, y: GND, w: 22, h: 30, vy: 0, onGround: true, ducking: false, legFrame: 0 };
+const dino = { x: 90, y: GND, vy: 0, onGround: true, ducking: false, legFrame: 0 };
 let obstacles = [], clouds = [], stars = [];
 
 function initStars() {
-  stars = Array.from({length: 40}, () => ({
-    x: Math.random() * W, y: Math.random() * (GND - 30),
-    r: Math.random() < 0.3 ? 1.5 : 1, alpha: 0.2 + Math.random() * 0.5
+  stars = Array.from({length: 55}, () => ({
+    x: Math.random() * W, y: Math.random() * (GND - 40),
+    r: Math.random() < 0.3 ? 2 : 1, alpha: 0.2 + Math.random() * 0.5
   }));
 }
 initStars();
 
 function initClouds() {
-  clouds = Array.from({length: 5}, (_, i) => ({
-    x: 100 + i * 140 + Math.random() * 60,
-    y: 20 + Math.random() * 40, w: 40 + Math.random() * 40
+  clouds = Array.from({length: 6}, (_, i) => ({
+    x: 80 + i * 160 + Math.random() * 60, y: 24 + Math.random() * 55, w: 55 + Math.random() * 55
   }));
 }
 initClouds();
 
 function reset() {
-  dino.y = GND; dino.vy = 0; dino.onGround = true; dino.ducking = false; dino.h = 30;
-  obstacles = []; speed = 5; score = 0; frame = 0;
-  initClouds();
+  dino.y = GND; dino.vy = 0; dino.onGround = true; dino.ducking = false;
+  obstacles = []; speed = 5; score = 0; frame = 0; initClouds();
 }
 
-function jump() {
-  if (!dino.onGround) return;
-  dino.vy = JUMP_V; dino.onGround = false; dino.ducking = false; dino.h = 30;
-}
-
-function duck(on) {
-  if (!dino.onGround) return;
-  dino.ducking = on; dino.h = on ? 16 : 30; dino.y = on ? GND + 14 : GND;
-}
+function jump() { if (!dino.onGround) return; dino.vy = JUMP_V; dino.onGround = false; dino.ducking = false; }
+function duck(on) { if (!dino.onGround) return; dino.ducking = on; dino.y = on ? GND + 18 : GND; }
 
 document.addEventListener('keydown', e => {
-  if (e.code === 'Space' || e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (state === 'idle' || state === 'dead') { startGame(); return; }
-    jump();
-  }
+  if (e.code === 'Space' || e.key === 'ArrowUp') { e.preventDefault(); if (state === 'idle' || state === 'dead') { startGame(); return; } jump(); }
   if (e.key === 'ArrowDown') { e.preventDefault(); duck(true); }
 });
 document.addEventListener('keyup', e => { if (e.key === 'ArrowDown') duck(false); });
 canvas.addEventListener('touchstart', e => {
   e.preventDefault();
   if (state === 'idle' || state === 'dead') { startGame(); return; }
-  const ty = e.touches[0].clientY;
   const rect = canvas.getBoundingClientRect();
-  if ((ty - rect.top) / rect.height > 0.6) duck(true); else jump();
+  if ((e.touches[0].clientY - rect.top) / rect.height > 0.6) duck(true); else jump();
 }, { passive: false });
 canvas.addEventListener('touchend', () => duck(false), { passive: true });
 
 function startGame() { reset(); state = 'running'; overlay.style.display = 'none'; }
 
 function spawnObstacle() {
-  const type = Math.random();
-  if (type < 0.55) {
+  if (Math.random() < 0.55) {
     const n = Math.floor(1 + Math.random() * 3);
-    obstacles.push({ x: W + 10, type: 'cactus', count: n, w: n * 16, h: 38 + Math.random() * 16 });
+    obstacles.push({ x: W + 10, type: 'cactus', count: n, w: n * 20, h: 50 + Math.random() * 24 });
   } else {
-    obstacles.push({ x: W + 10, type: 'bird', w: 28, h: 16, y: GND - 28 - Math.random() * 48, flap: 0 });
+    obstacles.push({ x: W + 10, type: 'bird', w: 36, h: 20, y: GND - 36 - Math.random() * 64, flap: 0 });
   }
 }
 
 function drawPixelDino() {
   const x = dino.x, y = dino.y, dk = dino.ducking;
+  const S = 1.4;
   ctx.fillStyle = '#ccc';
   if (dk) {
-    ctx.fillRect(x - 2, y - 2, 26, 10);
-    ctx.fillRect(x + 12, y - 10, 8, 8);
-    ctx.fillRect(x + 17, y - 12, 3, 3);
-    ctx.fillStyle = '#0f0f0f'; ctx.fillRect(x + 18, y - 11, 1, 1);
+    ctx.fillRect(x - 3, y - 3, 33*S|0, 13*S|0);
+    ctx.fillRect(x + 15*S|0, y - 13*S|0, 10*S|0, 10*S|0);
+    ctx.fillRect(x + 21*S|0, y - 16*S|0, 4*S|0, 4*S|0);
+    ctx.fillStyle = '#0f0f0f'; ctx.fillRect(x + 23*S|0, y - 14*S|0, 2, 2);
     ctx.fillStyle = '#ccc';
     const lf = Math.floor(dino.legFrame / 8) % 2;
-    ctx.fillRect(x + 2, y + 8, 5, lf === 0 ? 5 : 3);
-    ctx.fillRect(x + 14, y + 8, 5, lf === 0 ? 3 : 5);
+    ctx.fillRect(x + 3*S|0, y + 10*S|0, 7*S|0, lf === 0 ? 7 : 4);
+    ctx.fillRect(x + 18*S|0, y + 10*S|0, 7*S|0, lf === 0 ? 4 : 7);
   } else {
-    ctx.fillRect(x, y - 28, 18, 14);
-    ctx.fillRect(x + 4, y - 32, 12, 8);
-    ctx.fillRect(x + 14, y - 26, 6, 4);
-    ctx.fillStyle = '#0f0f0f'; ctx.fillRect(x + 16, y - 28, 2, 2);
+    ctx.fillRect(x, y - 39, 25, 20);
+    ctx.fillRect(x + 6, y - 46, 17, 12);
+    ctx.fillRect(x + 20, y - 37, 9, 6);
+    ctx.fillStyle = '#0f0f0f'; ctx.fillRect(x + 23, y - 40, 3, 3);
     ctx.fillStyle = '#ccc';
-    ctx.fillRect(x, y - 16, 18, 16);
+    ctx.fillRect(x, y - 22, 25, 22);
     if (dino.onGround) {
       const lf = Math.floor(dino.legFrame / 8) % 2;
-      ctx.fillRect(x + 2, y, 5, lf === 0 ? 8 : 5);
-      ctx.fillRect(x + 10, y, 5, lf === 0 ? 5 : 8);
-    } else {
-      ctx.fillRect(x + 2, y, 5, 6); ctx.fillRect(x + 10, y, 5, 6);
-    }
+      ctx.fillRect(x + 3, y, 7, lf === 0 ? 11 : 7);
+      ctx.fillRect(x + 14, y, 7, lf === 0 ? 7 : 11);
+    } else { ctx.fillRect(x + 3, y, 7, 8); ctx.fillRect(x + 14, y, 7, 8); }
   }
 }
 
 function drawCactus(o) {
   ctx.fillStyle = '#4a4a4a';
   for (let i = 0; i < o.count; i++) {
-    const tx = o.x + i * 8;
-    ctx.fillRect(tx, GND - o.h, 10, o.h);
+    const tx = o.x + i * 11;
+    ctx.fillRect(tx, GND - o.h, 13, o.h);
     if (i === 0 || i === o.count - 1) {
-      ctx.fillRect(tx - 6, GND - o.h * 0.65, 6, 8);
-      ctx.fillRect(tx - 6, GND - o.h * 0.65 - 8, 10, 5);
+      ctx.fillRect(tx - 8, GND - o.h * 0.65, 8, 11); ctx.fillRect(tx - 8, GND - o.h * 0.65 - 11, 14, 7);
     }
   }
 }
@@ -211,98 +181,72 @@ function drawCactus(o) {
 function drawBird(o) {
   ctx.fillStyle = '#4a4a4a';
   const flap = Math.floor(o.flap / 10) % 2;
-  ctx.fillRect(o.x, o.y, 28, 8);
-  if (flap === 0) ctx.fillRect(o.x + 4, o.y - 7, 16, 7);
-  else ctx.fillRect(o.x + 4, o.y + 8, 16, 7);
-  ctx.fillRect(o.x + 24, o.y + 1, 8, 4);
-  ctx.fillStyle = '#0f0f0f'; ctx.fillRect(o.x + 26, o.y + 2, 2, 2);
+  ctx.fillRect(o.x, o.y, 36, 11);
+  if (flap === 0) ctx.fillRect(o.x + 5, o.y - 10, 20, 10); else ctx.fillRect(o.x + 5, o.y + 11, 20, 10);
+  ctx.fillRect(o.x + 31, o.y + 2, 10, 5);
+  ctx.fillStyle = '#0f0f0f'; ctx.fillRect(o.x + 34, o.y + 3, 2, 2);
 }
 
 function hitTest(o) {
-  const dx = dino.x, dy = dino.y - (dino.ducking ? 16 : 28);
-  const dw = 16, dh = dino.ducking ? 16 : 28;
-  const ox = o.x + 4, ow = o.w - 8;
-  const oy = o.type === 'cactus' ? GND - o.h : o.y, oh = o.h;
+  const dx = dino.x, dy = dino.y - (dino.ducking ? 20 : 39), dw = 20, dh = dino.ducking ? 20 : 39;
+  const ox = o.x + 5, ow = o.w - 10, oy = o.type === 'cactus' ? GND - o.h : o.y, oh = o.h;
   return dx < ox + ow && dx + dw > ox && dy < oy + oh && dy + dh > oy;
 }
 
 function drawCloud(c) {
-  ctx.fillStyle = '#1e1e1e';
-  ctx.fillRect(c.x, c.y, c.w, 12);
-  ctx.fillRect(c.x + 8, c.y - 7, c.w - 16, 7);
-  ctx.fillRect(c.x + c.w * 0.4, c.y - 12, c.w * 0.3, 12);
+  ctx.fillStyle = '#1a1a1a';
+  ctx.fillRect(c.x, c.y, c.w, 16); ctx.fillRect(c.x + 10, c.y - 9, c.w - 20, 10); ctx.fillRect(c.x + c.w * 0.35, c.y - 16, c.w * 0.3, 16);
 }
 
 function drawGround() {
   ctx.strokeStyle = '#333'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(0, GND + 8); ctx.lineTo(W, GND + 8); ctx.stroke();
-  ctx.fillStyle = '#222';
-  for (let i = 0; i < 12; i++) {
-    const rx = ((frame * speed * 0.5) + i * 62) % W;
-    ctx.fillRect(rx, GND + 10, 20 + (i % 3) * 10, 2);
-    ctx.fillRect(rx + 35, GND + 14, 8, 1);
+  ctx.beginPath(); ctx.moveTo(0, GND + 10); ctx.lineTo(W, GND + 10); ctx.stroke();
+  ctx.fillStyle = '#1e1e1e';
+  for (let i = 0; i < 14; i++) {
+    const rx = ((frame * speed * 0.5) + i * 70) % W;
+    ctx.fillRect(rx, GND + 13, 28 + (i % 3) * 12, 3); ctx.fillRect(rx + 40, GND + 18, 10, 2);
   }
 }
 
 function fmtScore(n) { return String(Math.floor(n)).padStart(5, '0'); }
 
-let nextObstacle = 80, scoreFlash = 0;
+let nextObstacle = 90, scoreFlash = 0;
 
 function update() {
   if (state !== 'running') return;
-  frame++;
-  if (dino.onGround) dino.legFrame++;
+  frame++; if (dino.onGround) dino.legFrame++;
   dino.vy += GRAVITY; dino.y += dino.vy;
-  if (dino.y >= (dino.ducking ? GND + 14 : GND)) {
-    dino.y = dino.ducking ? GND + 14 : GND;
-    dino.vy = 0; dino.onGround = true;
-  }
-  score += speed * 0.02;
-  speed = 5 + Math.floor(score / 200) * 0.4;
+  const groundY = dino.ducking ? GND + 18 : GND;
+  if (dino.y >= groundY) { dino.y = groundY; dino.vy = 0; dino.onGround = true; }
+  score += speed * 0.02; speed = 5 + Math.floor(score / 200) * 0.4;
   if (Math.floor(score) % 100 === 0 && Math.floor(score) > 0) scoreFlash = 20;
   scoreEl.textContent = fmtScore(score);
   if (score > hiScore) hiScore = score;
   hiEl.textContent = 'HI ' + fmtScore(hiScore);
-  clouds.forEach(c => { c.x -= speed * 0.3; if (c.x < -80) { c.x = W + 10; c.y = 15 + Math.random() * 40; c.w = 40 + Math.random() * 40; } });
+  clouds.forEach(c => { c.x -= speed * 0.3; if (c.x < -90) { c.x = W + 10; c.y = 18 + Math.random() * 55; c.w = 55 + Math.random() * 55; } });
   nextObstacle--;
-  if (nextObstacle <= 0) { spawnObstacle(); nextObstacle = Math.floor(60 + Math.random() * 80 - Math.min(score / 60, 30)); }
+  if (nextObstacle <= 0) { spawnObstacle(); nextObstacle = Math.floor(65 + Math.random() * 90 - Math.min(score / 60, 35)); }
   for (let i = obstacles.length - 1; i >= 0; i--) {
-    obstacles[i].x -= speed;
-    if (obstacles[i].type === 'bird') obstacles[i].flap++;
-    if (obstacles[i].x < -50) { obstacles.splice(i, 1); continue; }
+    obstacles[i].x -= speed; if (obstacles[i].type === 'bird') obstacles[i].flap++;
+    if (obstacles[i].x < -60) { obstacles.splice(i, 1); continue; }
     if (hitTest(obstacles[i])) { die(); return; }
   }
 }
 
-function die() {
-  state = 'dead';
-  msgEl.textContent = 'GAME OVER';
-  subEl.textContent = 'PRESS SPACE / TAP TO RESTART';
-  overlay.style.display = 'flex';
-}
+function die() { state = 'dead'; msgEl.textContent = 'GAME OVER'; subEl.textContent = 'PRESS SPACE / TAP TO RESTART'; overlay.style.display = 'flex'; }
 
 function draw() {
   ctx.fillStyle = '#0f0f0f'; ctx.fillRect(0, 0, W, H);
-  stars.forEach(s => {
-    ctx.globalAlpha = s.alpha * (0.5 + 0.5 * Math.sin(frame * 0.02 + s.x));
-    ctx.fillStyle = '#aaa'; ctx.fillRect(s.x, s.y, s.r, s.r);
-  });
+  stars.forEach(s => { ctx.globalAlpha = s.alpha * (0.5 + 0.5 * Math.sin(frame * 0.02 + s.x)); ctx.fillStyle = '#aaa'; ctx.fillRect(s.x, s.y, s.r, s.r); });
   ctx.globalAlpha = 1;
-  clouds.forEach(drawCloud);
-  drawGround();
+  clouds.forEach(drawCloud); drawGround();
   obstacles.forEach(o => o.type === 'cactus' ? drawCactus(o) : drawBird(o));
   drawPixelDino();
-  if (scoreFlash > 0) {
-    ctx.fillStyle = scoreFlash % 4 < 2 ? '#fff' : '#0f0f0f';
-    ctx.font = 'bold 13px Courier New';
-    ctx.fillText(fmtScore(score), W - 80, 24);
-    scoreFlash--;
-  }
+  if (scoreFlash > 0) { ctx.fillStyle = scoreFlash % 4 < 2 ? '#fff' : '#0f0f0f'; ctx.font = 'bold 14px Courier New'; ctx.fillText(fmtScore(score), W - 90, 28); scoreFlash--; }
   if (state === 'dead') {
-    ctx.fillStyle = '#333'; ctx.fillRect(dino.x - 2, dino.y - 30, 22, 22);
-    ctx.fillStyle = '#666'; ctx.font = '10px Courier New';
-    ctx.fillText('X', dino.x + 14, dino.y - 24);
-    ctx.fillText('X', dino.x + 6, dino.y - 24);
+    ctx.fillStyle = '#2a2a2a'; ctx.fillRect(dino.x - 3, dino.y - 44, 30, 30);
+    ctx.fillStyle = '#666'; ctx.font = 'bold 12px Courier New';
+    ctx.fillText('X', dino.x + 17, dino.y - 30); ctx.fillText('X', dino.x + 7, dino.y - 30);
   }
 }
 
